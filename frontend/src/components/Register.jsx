@@ -9,10 +9,12 @@ const Register = ({ setUser }) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const API_URL = import.meta.env.VITE_API_URL || "";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/users/register", {username, email, password });
+      const { data } = await axios.post(`${API_URL}/api/users/register`, {username, email, password });
       localStorage.setItem("token", data.token);
       setUser(data);
       navigate("/");
